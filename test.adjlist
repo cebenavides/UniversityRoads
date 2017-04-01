@@ -1,0 +1,15 @@
+#C:/Users/Carlos/Desktop/graph_creation.py
+# GMT Sat Apr 01 01:18:10 2017
+# 
+A 3
+C {'weight': 15}
+B {'weight': 0.6}
+D {'weight': 3}
+C 3
+E {'weight': 0.7}
+D {'weight': 2}
+F {'weight': 0.9}
+B 0
+E 0
+D 0
+F 0

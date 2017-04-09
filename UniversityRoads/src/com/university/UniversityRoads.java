@@ -6,14 +6,17 @@ import org.jgrapht.alg.shortestpath.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import org.jgrapht.*;
-
+import com.opencsv.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 public class UniversityRoads {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         computeMatrix();
     }
 
-    private static void computeMatrix() {
+    private static void computeMatrix() throws IOException {
         //Creación del grafo de la universidad
         SimpleWeightedGraph<String, DefaultWeightedEdge> uni = createGraph();
         System.out.println(uni.toString());
@@ -87,25 +90,44 @@ public class UniversityRoads {
         }
 
     }
+   
 
-    private static SimpleWeightedGraph<String, DefaultWeightedEdge> createGraph() {
+    private static SimpleWeightedGraph<String, DefaultWeightedEdge> createGraph() throws FileNotFoundException, IOException {
         //Declaración e instancia del grafo
         SimpleWeightedGraph<String, DefaultWeightedEdge> g
                 = new SimpleWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
 
         //Añadiendo los nodos (lugares de la universidad)
-        g.addVertex("A");
-        g.addVertex("B");
-        g.addVertex("C");
-        g.addVertex("D");
-        g.addVertex("E");
-        g.addVertex("F");
-        g.addVertex("G");
-        g.addVertex("I");
-        g.addVertex("K");
+       
+         try (CSVReader reader = new CSVReader(new FileReader("Nodos.csv"))) {
+            String[] nextLine;
+            
+            while ((nextLine = reader.readNext()) != null) {
+                
+                for (String e: nextLine) {
+                    String d[] = e.split(";");
+                    //System.out.format("%s ", d[0]);
+                   
+                    g.addVertex(d[0]);
+                }
+            }
+        }
+         try (CSVReader reader = new CSVReader(new FileReader("Vertices.csv"))) {
+            String[] nextLine;
+            
+            while ((nextLine = reader.readNext()) != null) {
+                
+                for (String e: nextLine) {
+                    String f[] = e.split(";");
+                    g.setEdgeWeight(g.addEdge(f[0], f[1]), Double.parseDouble(f[2]));
+                    
+                }
+            }
+        
+        }
 
         //Añadiendo las aristas (rutas entre los lugares) con sus pesos
-        g.setEdgeWeight(g.addEdge("A", "B"), 1);
+       /* g.setEdgeWeight(g.addEdge("A", "B"), 1);
         g.setEdgeWeight(g.addEdge("B", "C"), 1);
         g.setEdgeWeight(g.addEdge("C", "D"), 1);
         g.setEdgeWeight(g.addEdge("D", "E"), 1);
@@ -113,9 +135,9 @@ public class UniversityRoads {
         g.setEdgeWeight(g.addEdge("G", "I"), 1);
         g.setEdgeWeight(g.addEdge("I", "K"), 1);
         g.setEdgeWeight(g.addEdge("K", "A"), 1);
-        g.setEdgeWeight(g.addEdge("B", "D"), 1);
+        g.setEdgeWeight(g.addEdge("B", "D"), 1);*/
 
         return g;
+    
     }
-
 }

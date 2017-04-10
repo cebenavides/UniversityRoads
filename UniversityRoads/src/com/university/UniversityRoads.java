@@ -90,7 +90,9 @@ public class UniversityRoads {
                             Distance dist1 = rdist.get(i).get(indices.get(i));
                             Distance dist2 = rdist.get(j).get(indices.get(j));
                             
-                            if (dist1.distance == dist2.distance) {
+                            if ((dist1.distance == dist2.distance) && 
+                                    (((1+indices.get(i))<boxes.size()) || ((indices.get(j)+1)<boxes.size()))) {
+                            
                             Distance dist11 = rdist.get(i).get(indices.get(i) + 1);
                             Distance dist22 = rdist.get(j).get(indices.get(j) + 1);
                             
@@ -131,6 +133,8 @@ public class UniversityRoads {
                                 System.out.println("Hola mundo cruel"); 
                                 
                                 }
+                            }else{
+                                peopleDP.add(people.get(j));
                             }
                     }                      
                 }

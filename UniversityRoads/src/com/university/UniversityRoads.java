@@ -41,12 +41,12 @@ public class UniversityRoads {
                     }else{
                         
                             String d[] = e.split(";");
-                            if(d[5] != null && !d[5].equals(" ")){
+                            if(d[5] != null && !d[5].equals(".")){
                                                         
                                 people.add(new Element(d[4],d[5]));
                             }else{
                             } 
-                            if(d[6] != null && !d[6].equals(" ")){
+                            if(d[6] != null && !d[6].equals(".")){
                                 
                                  boxes.add(new Element(d[6], d[7]));
                             }else{
@@ -244,7 +244,7 @@ public class UniversityRoads {
                     }else{
                         
                             String d[] = e.split(";");
-                            if(d[0] != null && !d[0].equals("")){
+                            if(d[0] != null && !d[0].equals(".")){
                                 //System.out.format("%s ", d[0]);
                                 g.addVertex(d[0]);
                             }else{
@@ -267,7 +267,7 @@ public class UniversityRoads {
                     }else{
                         //System.out.println("Entre");
                             String d[] = e.split(";");
-                            if(d[2] != null && !d[2].equals(" ")){
+                            if(d[2] != null && !d[2].equals(".")){
                                 //System.out.format("%s ", d[2]);
                                 g.setEdgeWeight(g.addEdge(d[1], d[2]),Double.parseDouble(d[3]));
                             }else{

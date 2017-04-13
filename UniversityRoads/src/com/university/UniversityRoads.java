@@ -27,18 +27,34 @@ public class UniversityRoads {
         List<Element> peopleDP = new ArrayList<>(); 
         List<Element> boxes = new ArrayList<>();
 
-        //Ubicación de las personas y las cajas
-        people.add(new Element("Jorge", "A"));
-        people.add(new Element("Dayan", "E"));
-        people.add(new Element("Mike", "B"));
-        boxes.add(new Element("Caja 1", "C"));
-    //    boxes.add(new Element("Caja 1", "E"));
-        
-       
-        boxes.add(new Element("Caja 2", "D"));
-//        boxes.add(new Element("Caja 3", "G"));
-//        boxes.add(new Element("Caja 4", "C"));
-
+        try (CSVReader reador = new CSVReader(new FileReader("Configuración Inicial.csv"))) {
+            String[] nextLine;
+            
+            int salte=0;
+            while ((nextLine = reador.readNext()) != null) {
+                
+                for (String e: nextLine) {
+                    if (salte ==0){
+                    
+                    }else{
+                        
+                            String d[] = e.split(";");
+                            if(d[5] != null && !d[5].equals(".")){
+                                                        
+                                people.add(new Element(d[4],d[5]));
+                            }else{
+                            } 
+                            if(d[6] != null && !d[6].equals(".")){
+                                
+                                 boxes.add(new Element(d[6], d[7]));
+                            }else{
+                            } 
+                    }
+                    salte++;
+                }
+              
+            }
+        }
         /*Inicialización de la lista en la que quedarán las rutas que deberá
         tomar cada persona*/
         List<List<GraphPath<String, DefaultWeightedEdge>>> routes = new ArrayList<>();
@@ -236,42 +252,54 @@ public class UniversityRoads {
                 = new SimpleWeightedGraph<String, DefaultWeightedEdge>(DefaultWeightedEdge.class);
 
         //Añadiendo los nodos (lugares de la universidad)
-        try (CSVReader reador = new CSVReader(new FileReader("nodos.csv"))) {
+
+        //Añadiendo los nodos (lugares de la universidad)
+        try (CSVReader reador = new CSVReader(new FileReader("Configuración Inicial.csv"))) {
             String[] nextLine;
+            int salte=0;
             while ((nextLine = reador.readNext()) != null) {
                 
                 for (String e: nextLine) {
-                    System.out.format("%s ", e);
+                    if (salte ==0){
+                    
+                    }else{
+                        
+                            String d[] = e.split(";");
+                            if(d[0] != null && !d[0].equals(".")){
+                                //System.out.format("%s ", d[0]);
+                                g.addVertex(d[0]);
+                            }else{
+                            } 
+                    }
+                    salte++;
                 }
+              
+            }
+        }
+         try (CSVReader reador = new CSVReader(new FileReader("Configuración Inicial.csv"))) {
+            String[] nextLine;
+            int salte=0;
+            
+            while ((nextLine = reador.readNext()) != null) {
+                
+                for (String e: nextLine) {
+                    if (salte ==0){
+                    
+                    }else{
+                        //System.out.println("Entre");
+                            String d[] = e.split(";");
+                            if(d[2] != null && !d[2].equals(".")){
+                                //System.out.format("%s ", d[2]);
+                                g.setEdgeWeight(g.addEdge(d[1], d[2]),Double.parseDouble(d[3]));
+                            }else{
+                            } 
+                    }
+                    salte++;
+                }
+              
             }
         }
         
-        
-        g.addVertex("A");
-        g.addVertex("B");
-        g.addVertex("C");
-        g.addVertex("D");
-        g.addVertex("DP");
-        g.addVertex("E");
-        g.addVertex("F");
-        g.addVertex("G");
-/*
-        g.addVertex("E");
-        g.addVertex("F");
-        g.addVertex("G");
-        g.addVertex("I");
-        g.addVertex("K");
-        g.addVertex("H");
-        g.addVertex("DP");
-  */        
-        //Añadiendo las aristas (rutas entre los lugares) con sus pesos
-        g.setEdgeWeight(g.addEdge("A", "B"), 1.1);
-        g.setEdgeWeight(g.addEdge("A", "C"), 1.2);
-        g.setEdgeWeight(g.addEdge("A", "DP"), 10);
-        g.setEdgeWeight(g.addEdge("B", "D"), 1.3);
-        g.setEdgeWeight(g.addEdge("B", "C"), 1.4);
-        g.setEdgeWeight(g.addEdge("C", "E"), 1.5);
-        g.setEdgeWeight(g.addEdge("D", "E"), 2);
 
         return g;
     }

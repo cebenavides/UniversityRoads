@@ -1,0 +1,12 @@
+Nodo;Nodo 1;Nodo 2;Distancia 1-2;Nombre operario;Posición;Nombre de la caja;Posición
+A;A;B;1;Jorge;A;Caja 1;B
+B;B;C;1;Mike;E;Caja 2;D
+C;C;D;1;Dayo;C;Caja 3;G
+D;D;E;1;.;.;.;.
+E;E;F;1;.;.;.;.
+F;F;G;1;.;.;.;.
+G;G;H;1;.;.;.;.
+I;H;I;1;.;.;.;.
+K;I;A;1;.;.;.;.
+H;A;DP;1;.;.;.;.
+DP;.;.;.;.;.;.;.
